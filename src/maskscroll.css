@@ -1,0 +1,177 @@
+/* MaskScroll.css */
+
+/* Scope utama untuk menghindari konflik global */
+.mask-main-container {
+  width: 100%;
+  background-color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.mask-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Layer 1: Background Image Awal (Hero) */
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.bg-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Layer 2: Hero Content Overlay (REVISI: Harus Terlihat di Awal) */
+.mask-main-container .hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  /* Lebih tinggi dari mask agar tombol dapat diklik di awal */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 15vh;
+  text-align: center;
+  opacity: 1;
+  /* Pastikan muncul saat load pagenya */
+  visibility: visible;
+}
+
+/* Tipografi Hero */
+.mask-main-container .hero-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.mask-main-container .hero-description {
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 auto 30px auto;
+  line-height: 1.6;
+  display: none;
+}
+
+/* Kontainer Tombol */
+.mask-main-container .hero-buttons {
+  display: none;
+  gap: 20px;
+  justify-content: center;
+  pointer-events: auto;
+  /* Mengizinkan interaksi klik */
+}
+
+/* Style Dasar Tombol */
+.mask-main-container .hero-btn-primary,
+.mask-main-container .hero-btn-secondary {
+  padding: 15px 35px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  font-family: inherit;
+}
+
+.mask-main-container .hero-btn-primary {
+  background: white;
+  color: black;
+  border: none;
+}
+
+.mask-main-container .hero-btn-primary:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-3px);
+}
+
+/* Style Button Secondary sesuai permintaan */
+.mask-main-container .hero-btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
+.mask-main-container .hero-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  /* Transparansi tipis */
+  backdrop-filter: blur(15px);
+  /* Efek kaca */
+  -webkit-backdrop-filter: blur(15px);
+  transform: translateY(-3px);
+}
+
+/* Layer 3: SVG Mask Layer (Area Putih dengan Lubang Teks) */
+.mask-svg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  /* Berada di antara gambar dasar dan hero overlay */
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  /* Mulai dari tersembunyi, dimunculkan oleh GSAP */
+}
+
+.mask-svg-layer svg {
+  width: 100vw;
+  height: 100vh;
+}
+
+.mask-group {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  letter-spacing: -2px;
+  /* Kesan padat saat teks raksasa */
+}
+
+/* Section Terakhir: Perairan Raja Ampat */
+.perairan-section {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #000;
+  z-index: 30;
+  /* Paling depan saat muncul di akhir scroll */
+}
+
+.perairan-title {
+  position: absolute;
+  z-index: 2;
+  color: white;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+  opacity: 1;
+}
+
+.perairan-section .bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mask-main-container .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
